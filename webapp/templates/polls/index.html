@@ -16,7 +16,10 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ poll.question }}</h5>
                         <a href="{% url "PollView" poll.pk %}" class="card-link">Подробнее</a>
+                        <p><a href="{% url "CreateAnswers" poll.pk %}" class="card-link">Пройти опрос</a></p>
+
                     </div>
+
                 </div>
             </div>
         {% endfor %}

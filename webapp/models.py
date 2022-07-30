@@ -37,3 +37,18 @@ class Choice(BaseModel):
         db_table = "choices"
         verbose_name = "Ответ"
         verbose_name_plural = "Ответы"
+
+
+class Answer(BaseModel):
+    poll = models.ForeignKey("webapp.Poll", related_name="answers", on_delete=models.CASCADE,
+                             verbose_name='Опрос')
+    choice = models.ManyToManyField("webapp.Choice", related_name="answer_variants",
+                                    verbose_name='Варианты ответов')
+
+    def __str__(self):
+        return f"{self.poll}. {self.choice}"
+
+    class Meta:
+        db_table = "answers"
+        verbose_name = 'Вариант ответа'
+        verbose_name_plural = 'Варианты ответов'
