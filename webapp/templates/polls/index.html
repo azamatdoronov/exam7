@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block nav %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url "CreatePoll" %}">Создать опрос</a>
+    </li>
+{% endblock %}
+{% block content %}
+    <br>
+    <h1>Опросы:</h1>
+    <br>
+    <div class="row">
+        {% for poll in polls %}
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card border-primary bg-light mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ poll.question }}</h5>
+                        <a href="{% url "PollView" poll.pk %}" class="card-link">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="d-flex justify-content-center">
+            {% if is_paginated %}
+                {% include "partial/pagination.html" %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

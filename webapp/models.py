@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class BaseModel(models.Model):
@@ -12,13 +13,11 @@ class BaseModel(models.Model):
 class Poll(BaseModel):
     question = models.TextField(max_length=300, null=False, blank=False, verbose_name="Вопрос")
 
-    # tags = models.ManyToManyField("webapp.Tag", related_name="articles", blank=True)
-
     def __str__(self):
         return f"{self.id}. {self.question}"
 
-    # def get_absolute_url(self):
-    #     return reverse("article_view", kwargs={"pk": self.pk})
+    def get_absolute_url(self):
+        return reverse("PollView", kwargs={"pk": self.pk})
 
     class Meta:
         db_table = "polls"
@@ -38,15 +37,3 @@ class Choice(BaseModel):
         db_table = "choices"
         verbose_name = "Ответ"
         verbose_name_plural = "Ответы"
-
-
-# class Tag(BaseModel):
-#     name = models.CharField(max_length=31, verbose_name='Тег')
-#
-#     def __str__(self):
-#         return self.name
-#
-#     class Meta:
-#         db_table = "tags"
-#         verbose_name = "Тэг"
-#         verbose_name_plural = "Тэги"
