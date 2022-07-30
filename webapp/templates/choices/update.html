@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Update Choice{% endblock %}
+
+{% block content %}
+    <h1>Изменение ответа:</h1>
+    <form action="" method="post">
+        {% include "partial/form.html" with button_text="Изменить" %}
+    </form>
+    <a href="{% url "PollView" choice.poll.pk %}">Назад</a>
+    <a href="{% url "index" %}">На главную</a>
+{% endblock %}

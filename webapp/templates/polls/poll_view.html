@@ -27,6 +27,15 @@
         <b>Дата изменения:</b>
         {{ poll.updated_p }}
     </p>
+    <b>Ответы:</b>
+    {% for choice in poll.choices.all %} <br>
+        {{ choice.text_answer }} <br>
+        <a href="{% url "UpdateChoice" choice.pk %}">Изменить</a>
+        <a href="{% url "DeleteChoice" choice.pk %}">Удалить</a>
+    {% endfor %}
+    <br>
+    <br>
+    <a href="{% url "PollCreateChoice" poll.pk %}">Добавить свой ответ</a>
     <br>
     <br>
     <a href="{% url "index" %}">На главную</a>
